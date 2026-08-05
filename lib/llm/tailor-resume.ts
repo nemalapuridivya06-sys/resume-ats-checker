@@ -22,7 +22,7 @@ export async function tailorResumeWithLLM(resume: string, jd: string): Promise<T
       { role: 'user', content: userMessage },
     ],
     json: true,
-    maxTokens: 2500,
+    maxTokens: 6000,
     temperature: 0.3,
   });
 
