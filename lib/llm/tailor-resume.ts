@@ -10,7 +10,16 @@ target job description, then produce a NEW resume that:
 4. Includes quantified outcomes wherever the original suggests them — and uses [bracketed placeholders] when the candidate must fill in a real number
 5. Weaves in keywords from the job description ONLY where the candidate plausibly has the skill — never invent expertise
 
-You MUST respond with strict JSON only, no markdown, no prose. The JSON must match the TailoredResume interface exactly.
+You MUST respond with strict JSON only, no markdown, no prose. The JSON must match the following interface exactly:
+{
+  "name": "string",
+  "contact": { "email": "string", "phone": "string", "github": "string", "linkedin": "string" },
+  "summary": "string",
+  "skills": ["string"],
+  "education": [{ "degree": "string", "school": "string", "dates": "string", "details": "string" }],
+  "projects": [{ "title": "string", "bullets": ["string"] }],
+  "experience": [{ "title": "string", "company": "string", "dates": "string", "bullets": ["string"] }]
+}
 `.trim();
 
 export async function tailorResumeWithLLM(resume: string, jd: string): Promise<TailoredResume | null> {
