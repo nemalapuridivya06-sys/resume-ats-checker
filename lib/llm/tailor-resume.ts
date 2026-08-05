@@ -47,8 +47,20 @@ export async function tailorResumeWithLLM(resume: string, jd: string): Promise<T
       summary: parsed.summary || '',
       skills: Array.isArray(parsed.skills) ? parsed.skills : [],
       education: Array.isArray(parsed.education) ? parsed.education : [],
-      projects: Array.isArray(parsed.projects) ? parsed.projects : [],
-      experience: Array.isArray(parsed.experience) ? parsed.experience : [],
+      projects: Array.isArray(parsed.projects) 
+        ? parsed.projects.map((p: any) => ({
+            title: p.title || '',
+            bullets: Array.isArray(p.bullets) ? p.bullets : []
+          }))
+        : [],
+      experience: Array.isArray(parsed.experience) 
+        ? parsed.experience.map((e: any) => ({
+            title: e.title || '',
+            company: e.company || '',
+            dates: e.dates || '',
+            bullets: Array.isArray(e.bullets) ? e.bullets : []
+          }))
+        : [],
     };
 
     return tailored;
